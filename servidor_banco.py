@@ -1,12 +1,13 @@
 import socket
 import threading
+import time
+
 
 contador_clientes = 0 #recurso compartido
 lock = threading.Lock()
 
 def handle_client(conn, addr):
     global contador_clientes
-
     name = conn.recv(1024).decode()
 
     #seccion critica protegida
@@ -14,14 +15,14 @@ def handle_client(conn, addr):
          contador_clientes += 1
          numero = contador_clientes
 
-
+    time.sleep(10) 
     print (f"Cliente {contador_clientes } atendido desde {addr} ")
 
     response = f"Hola {name} eres el numero : {contador_clientes  }"
     conn.sendall(response.encode())
 
     conn.close()
-
+    print(f"Cliente {contador_clientes} finalizado y conexion cerrada con {addr}")
 
 
 
@@ -37,3 +38,5 @@ while True:
         args=(conn, addr)
     )
     thread.start()
+
+
