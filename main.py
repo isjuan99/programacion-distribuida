@@ -34,7 +34,7 @@ def crear_cliente (nombre: str) : # Parámetro recibido por query
         "id": len(clientes) + 1, # Generación simple de ID
         "nombre": nombre
     }
-    clientes. append(cliente) # Agrega cliente a lista global
+    clientes.append(cliente) # Agrega cliente a lista global
 
     return cliente # Devuelve cliente creado
 
